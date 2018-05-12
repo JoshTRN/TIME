@@ -1,0 +1,26 @@
+{
+  "name": "time",
+  "version": "1.0.0",
+  "description": "",
+  "main": "firebase.js",
+  "dependencies": {
+    "firebaseui": "^3.0.0",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshTRN/TIME.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshTRN/TIME/issues"
+  },
+  "homepage": "https://github.com/JoshTRN/TIME#readme"
+}
