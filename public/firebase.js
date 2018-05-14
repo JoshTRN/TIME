@@ -1,4 +1,6 @@
 // Initialize Firebase
+// var db = require('../models');
+
 var config = {
     apiKey: "AIzaSyBgQE_DFr-Q0lreomoqeEF3CkZV38oCn7Y",
     authDomain: "time-6c867.firebaseapp.com",
@@ -10,7 +12,6 @@ var config = {
 firebase.initializeApp(config);
 
 var provider = new firebase.auth.GoogleAuthProvider();
-
 $('#trigger').click(function () {
 
     firebase.auth().signInWithPopup(provider).then(function (result) {
@@ -19,7 +20,15 @@ $('#trigger').click(function () {
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        console.log(user);
+
+
+        $.post('/api/users', { "user": user.email }, function (data) {
+            console.log('user sent');
+
+            location.reload();
+        })
+        console.log(user.email);
+
         // ...
     }).catch(function (error) {
         // Handle Errors here.
@@ -31,4 +40,15 @@ $('#trigger').click(function () {
         var credential = error.credential;
         // ...
     })
+});
+
+$('#logout').click(function () {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+
+        $.get('/logout');
+        console.log('signed out');
+    }).catch(function (error) {
+        // An error happened.
+    });
 });
