@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Static directory
-app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
 
 //session for verification
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
