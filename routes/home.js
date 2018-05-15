@@ -20,7 +20,7 @@ module.exports = function (app) {
     app.get("/home", function (req, res) {
         db.Tasks.findAll({}).then(function(result){
             console.log(result);
-            res.json(result);
+            res.sendFile(path.join(__dirname, '../public/cuto-portal.html'));
         })
     });
 
@@ -40,6 +40,14 @@ module.exports = function (app) {
                 });
             }
         });
+
+        app.post('/api/tasks', function( req, res) {
+            console.log(req.body);
+            // db.Tasks.create(req.body)
+            // res.json();
+        });
+
+
 
 
         req.session.user = req.body.user

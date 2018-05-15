@@ -22,7 +22,7 @@ app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 require('./routes/home.js')(app);
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
       console.log("App listening on http://localhost:" + PORT);
     });
