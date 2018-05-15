@@ -7,13 +7,20 @@ module.exports = function (app) {
         if (req.session.user) {
             res.redirect('/home')
         } else {
-            res.sendFile(path.join(__dirname, "../index.html"));
+            res.sendFile(path.join(__dirname, "../public/hazmathub-signup.html"));
         }
     });
 
     app.get("/logout", function (req, res) {
         req.session.destroy(function (err) {
             res.redirect('/');
+        })
+    });
+
+    app.get("/home", function (req, res) {
+        db.Tasks.findAll({}).then(function(result){
+            console.log(result);
+            res.json(result);
         })
     });
 
