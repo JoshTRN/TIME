@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
       username: {
           type: DataTypes.STRING,
           primaryKey: true
-      }
+      },
+      picURL: DataTypes.STRING
     }, {
       timestamps: false
     });

@@ -21,13 +21,21 @@ $('#signin').click(function () {
         // The signed-in user info.
         var user = result.user;
 
+        console.log(user.photoURL);
 
-        $.post('/api/users', { "user": user.email }, function (data) {
+        $.post('/api/users',{ 
+            "user": user.email,
+            "picURL": user.photoURL
+        },
+         function (data) {
             console.log('user sent');
 
             location.reload();
         })
-        console.log(user.email);
+        
+        app.get('/'+user.email+"/tasks", function(data) {
+            console.log('getting tasks');
+        })
 
         // ...
     }).catch(function (error) {
