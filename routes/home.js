@@ -4,6 +4,7 @@ var db = require('../models');
 module.exports = function (app) {
 
     app.get("/", function (req, res) {
+        console.log(req.session.user)
         if (req.session.user) {
             res.redirect('/home')
         } else {
@@ -42,15 +43,24 @@ module.exports = function (app) {
         });
 
         app.post('/api/tasks', function( req, res) {
-            console.log(req.body);
-            // db.Tasks.create(req.body)
-            // res.json();
+
+            db.Tasks.create({
+                category: req.body.category,
+                taskName: req.body.name,
+                description: req.body.description,
+                start: req.body.start,
+                duration: req.body.duration
+            })
         });
 
 
-
+        app.get('/:username/tasks', function(req, res) {
+            console.log(req.body)
+            res.send('hi');
+        }) 
 
         req.session.user = req.body.user
         res.send(200);
     });
+
 }
