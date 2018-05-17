@@ -59,11 +59,36 @@ module.exports = function (app) {
 
         if (req.session.user === req.params.username) {
 
+            var photo;
+
+            db.User.findOne({
+                where: {
+                    username: req.session.user
+                }
+            }).then(function (info) {
+                console.log(info.dataValues.picURL);
+                photo = info.dataValues.picURL
+            })
+
             db.Tasks.findAll({}).then(function (data) {
-                res.render('index', { data })
+                res.render('index', {
+                    data: data,
+                    helpers: {
+                        photo: photo
+                    }
+                })
             });
         } else {
             res.redirect('/');
         }
+    })
+
+    app.delete('/:username/tasks/delete/:id', function (req, res) {
+        console.log('hitting')
+        db.Tasks.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
     })
 }

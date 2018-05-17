@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 //session for verification
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}))
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

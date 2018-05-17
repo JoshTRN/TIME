@@ -290,22 +290,22 @@
                                         <div class="card card-table table-responsive-md table-full-width table-striped table-hover">
                                             <div class="card-body">
                                                 <div class="toolbar"></div>
-                                                
+
                                                 <table class="table">
                                                     <thead>
-                                                        <th data-field="id" data-sortable="true">ID</th>
+                                                        <th data-field="id" data-sortable="true">Category</th>
                                                         <th data-field="name" data-sortable="true">Name</th>
                                                         <th data-field="salary" data-sortable="true">Task</th>
                                                         <th data-field="country" data-sortable="true">Date</th>
-                                                        <th data-field="city">Type</th>
+                                                        <th data-field="city">Duration</th>
                                                         <th data-field="actions" class="td-actions text-left" data-events="operateEvents" data-formatter="operateFormatter">Actions</th>
                                                     </thead>
                                                     <tbody>
                                                         {{#each data}} {{#unless this.completed}}
-                                                        <tr>
-                                                            
+                                                        <tr id="{{this.id}}">
+
                                                             <td>
-                                                                <img src="customer.png" alt="Circle Image" class="img-raised rounded-circle img-fluid" style="max-height: 75px; max-width: 75px;">
+                                                                {{this.category}}
                                                             </td>
                                                             <td>{{this.taskName}}</td>
                                                             <td>{{this.description}}</td>
@@ -314,61 +314,25 @@
                                                             </td>
                                                             <td>{{this.duration}}</td>
                                                             <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">phonelink_ring</i> Do Task
-                                                                </button>
-                                                                <br>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
+                                                                <div class="text-center" style="display:inline-block;">
+                                                                    <button class="btn btn-danger delete-task" >
+                                                                        <i class="material-icons">delete_forever
+                                                                        </i>
+                                                                    </button>
+                                                                    <button class="btn btn-success">
+                                                                            <i class="material-icons">play_arrow</i>
+                                                                    </button>
+                                                                    <br>
+                                                                    <button class="btn btn-success details">
+                                                                        <i class="material-icons">search</i>
+                                                                    </button>
+                                                                    <button class="btn btn-success complete">
+                                                                        <i class="material-icons">done</i>
+                                                                    </button>
+                                                                </div>
                                                             </td>
-                                                            {{/unless}}
-                                                            {{/each}}
+                                                            {{/unless}} {{/each}}
                                                         </tr>
-                                                        {{!-- <tr>
-                                                            <td>
-                                                                <img src="customer.png" alt="Circle Image" class="img-raised rounded-circle img-fluid" style="max-height: 75px; max-width: 75px;">
-                                                            </td>
-                                                            <td>Task</td>
-                                                            <td>TBD</td>
-                                                            <td>
-                                                                <script>
-                                                                    document.write(new Date().getUTCMonth(), "/", new Date().getDate(), "/", new Date().getFullYear())
-                                                                </script>
-                                                            </td>
-                                                            <td>Some Task</td>
-                                                            <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">phonelink_ring</i> Do Task
-                                                                </button>
-                                                                <br>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <img src="customer.png" alt="Circle Image" class="img-raised rounded-circle img-fluid" style="max-height: 75px; max-width: 75px;">
-                                                            </td>
-                                                            <td>Task</td>
-                                                            <td>TBD</td>
-                                                            <td>
-                                                                <script>
-                                                                    document.write(new Date().getMonth(), "/", new Date().getDate(), "/", new Date().getFullYear())
-                                                                </script>
-                                                            </td>
-                                                            <td>Some Task</td>
-                                                            <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">phonelink_ring</i> Do Task
-                                                                </button>
-                                                                <br>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
-                                                            </td>
-                                                        </tr> --}}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -384,42 +348,29 @@
                                                 <div class="toolbar"></div>
                                                 <table class="table">
                                                     <thead>
-                                                        <th data-field="state" data-checkbox="true"></th>
-                                                        <th data-field="id" class="text-left">task</th>
-                                                        <th data-field="name" data-sortable="true">type</th>
-                                                        <th data-field="salary" data-sortable="true">name</th>
-                                                        <th data-field="country" data-sortable="true">when</th>
-                                                        <th data-field="city">where</th>
+                                                        <th data-field="id" data-sortable="true">Category</th>
+                                                        <th data-field="name" data-sortable="true">Name</th>
+                                                        <th data-field="salary" data-sortable="true">Task</th>
+                                                        <th data-field="country" data-sortable="true">Date</th>
+                                                        <th data-field="city">Duration</th>
                                                         <th data-field="actions" class="td-actions text-left" data-events="operateEvents" data-formatter="operateFormatter">Actions</th>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        {{#each data}} {{#if this.completed}}
+                                                        <tr id="{{this.id}}">
+
                                                             <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
+                                                                {{this.category}}
                                                             </td>
-                                                        </tr>
-                                                        <tr>
+                                                            <td>{{this.taskName}}</td>
+                                                            <td>{{this.description}}</td>
                                                             <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
+                                                                {{this.start}}
                                                             </td>
-                                                        </tr>
-                                                        <tr>
+                                                            <td>{{this.duration}}</td>
                                                             <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <button class="btn btn-success">
-                                                                    <i class="material-icons">search</i> View Details
-                                                                </button>
-                                                            </td>
+                                                            {{/if}} {{/each}}
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -495,7 +446,7 @@
                                         <div class="card">
                                             <div class="profile">
                                                 <div class="avatar">
-                                                    <img src="customer.png" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                                    <img src="{{photo}}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
                                                 </div>
                                                 <div class="name" style="padding-left: 5px;">
                                                     <h3 class="title"></h3>

@@ -44,5 +44,17 @@ $(document).ready(function () {
 		}).then(function (data) {
 			console.log('done');
 		});
+		location.reload();
 	});
+
+	$('.delete-task').click(function() {
+		var id = this.closest('tr').id;
+		$.ajax({
+			type: 'DELETE',
+			url: 'tasks/delete/' + id
+		})
+		$('#' + id).hide();
+	})
+
+	$('')
 });
