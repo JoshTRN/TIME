@@ -4,9 +4,13 @@
   "description": "",
   "main": "firebase.js",
   "dependencies": {
-    "firebaseui": "^3.0.0",
     "express": "^4.16.3",
-    "path": "^0.12.7"
+    "express-session": "^1.15.6",
+    "firebaseui": "^3.0.0",
+    "mysql2": "^1.5.3",
+    "path": "^0.12.7",
+    "sequelize": "^4.37.7",
+    "session": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {
