@@ -10,18 +10,22 @@ module.exports = function (sequelize, DataTypes) {
     taskName: DataTypes.STRING,
     description: DataTypes.TEXT,
     start: DataTypes.STRING,
-    duration: DataTypes.STRING
-    }, {
-    timestamps: false
-  });
-
-Tasks.associate = function (models) {
-  Tasks.belongsTo(models.User, {
-    foreignKey: {
-      allowNull: true
+    duration: DataTypes.STRING,
+    completed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
-  })
-}
+  }, {
+      timestamps: false
+    });
 
-return Tasks;
-  };
+  Tasks.associate = function (models) {
+    Tasks.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: true
+      }
+    })
+  }
+  return Tasks;
+};

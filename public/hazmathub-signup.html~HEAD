@@ -236,7 +236,7 @@
     <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="./assets/js/material-kit.js?v=2.0.2"></script>
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-    <script src='./js/firebase.js'></script>
+    <script src='firebase.js'></script>
 </body>
 
 </html>
