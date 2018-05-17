@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var session = require('express-session');
+var exphbs = require("express-handlebars");
 var db = require("./models");
 
 console.log('this')
@@ -19,6 +20,9 @@ app.use(express.static(__dirname + '/public'));
 
 //session for verification
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 require('./routes/home.js')(app);
 
