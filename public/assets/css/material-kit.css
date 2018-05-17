@@ -17252,7 +17252,7 @@ footer .pull-center {
 }
 
 .signup-page .page-header {
-    min-height: 100vh;
+    min-height: 25vh;
     height: auto;
     display: inherit;
 }
