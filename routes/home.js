@@ -4,8 +4,9 @@ var db = require('../models');
 module.exports = function (app) {
 
     app.get("/", function (req, res) {
+
         if (req.session.user) {
-            res.redirect('/'+req.session.user+'/tasks')
+            res.redirect('/' + req.session.user + '/tasks')
         } else {
             res.sendFile(path.join(__dirname, "../public/hazmathub-signup.html"));
         }
@@ -33,39 +34,36 @@ module.exports = function (app) {
                     picURL: req.body.picURL
                 });
             }
-           
-        req.session.user = req.body.user
-        res.send(200);
- 
+
+            req.session.user = req.body.user
+            res.send(200);
+
         });
 
     })
 
-        app.post('/api/tasks', function (req, res) {
+    app.post('/api/tasks', function (req, res) {
 
-            db.Tasks.create({
-                category: req.body.category,
-                taskName: req.body.name,
-                description: req.body.description,
-                start: req.body.start,
-                duration: req.body.duration,
-                UserUsername: req.session.user
-            })
-        });
-
-
-        app.get('/:username/tasks', function (req, res) {
-
-            if (req.session.user === req.params.username) {
-
-
-                db.Tasks.findAll({}).then(function (data) {
-                    // console.log(data)
-                    res.render('index', {data})
-                });
-            } else {
-                res.redirect('/');
-            }
+        db.Tasks.create({
+            category: req.body.category,
+            taskName: req.body.name,
+            description: req.body.description,
+            start: req.body.start,
+            duration: req.body.duration,
+            UserUsername: req.session.user
         })
+    });
 
+
+    app.get('/:username/tasks', function (req, res) {
+
+        if (req.session.user === req.params.username) {
+
+            db.Tasks.findAll({}).then(function (data) {
+                res.render('index', { data })
+            });
+        } else {
+            res.redirect('/');
+        }
+    })
 }

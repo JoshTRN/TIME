@@ -1,5 +1,4 @@
 module.exports = function (sequelize, DataTypes) {
-  var test = sequelize.import('./user.js')
   var Tasks = sequelize.define("Tasks", {
     id: {
       type: DataTypes.INTEGER,
@@ -17,18 +16,16 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     }
-    }, {
-    timestamps: false
-  });
+  }, {
+      timestamps: false
+    });
 
-Tasks.associate = function (models) {
-  console.log("hello", models.User)
-  Tasks.belongsTo(models.User, {
-    foreignKey: {
-      allowNull: true
-    }
-  })
-}
-// Tasks.belongsTo(user);
-return Tasks;
-  };
+  Tasks.associate = function (models) {
+    Tasks.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: true
+      }
+    })
+  }
+  return Tasks;
+};

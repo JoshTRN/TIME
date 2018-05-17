@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="./assets/css/material-kit.css?v=2.0.2">
 </head>
 
-<body class="profile-page">
-    <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
+<body class="signup-page" style=" background-color: #2c5a8f;">
+    <nav class="navbar navbar-color-on-scroll fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
         <div class="container">
             <div class="navbar-translate">
                 <a class="navbar-brand" href="">
@@ -58,7 +58,7 @@
             </div>
         </div>
     </nav>
-    <div class="page-header" data-parallax="true" style=" background-image: url('');"></div>
+    <div class="page-header" data-parallax="true" style=" background-color: #2c5a8f;"></div>
     <div class="main main-raised">
         <div class="container-fluid">
             <div class="row" style="padding-top: 30px;">
@@ -171,15 +171,6 @@
                                                                     </div>
 
                                                                 </div>
-<<<<<<< HEAD:public/BS4/cuto-portal.html
-                                                                <div class="col-lg-3 col-sm-4" style="text-align: left;">
-                                                                    <button class="btn btn-success" id="healthSubmit" type="reset" data-toggle="modal" data-target="#myModal">
-                                                                        <i class="material-icons">search</i> Submit
-                                                                    </button>
-                                                                </div>
-                                                                
-=======
->>>>>>> master:public/cuto-portal.html
                                                             </div>
 
                                                             <!--  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  -->
@@ -221,15 +212,6 @@
                                                                     </div>
 
                                                                 </div>
-<<<<<<< HEAD:public/BS4/cuto-portal.html
-                                                                <div class="col-lg-3 col-sm-4" style="text-align: left;">
-                                                                    <button id="workSubmit" class="btn btn-success" type="reset" data-toggle="modal" data-target="#myModal">
-                                                                        <i class="material-icons">search</i> Submit
-                                                                    </button>
-                                                                </div>
-                                                                
-=======
->>>>>>> master:public/cuto-portal.html
                                                             </div>
 
                                                             <!--  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  -->
@@ -256,19 +238,12 @@
                                                                             <label class="label-control">Choose Start Date/Time</label>
                                                                             <input id="recStart" type="text" class="form-control datetimepicker formStart" value="">
                                                                         </div>
-<<<<<<< HEAD:public/BS4/cuto-portal.html
-                                                                        <div class="col-lg-3 col-sm-4" style="text-align: left;">
-                                                                            <button id="recSubmit" class="btn btn-success" type="reset" data-toggle="modal" data-target="#myModal">
-                                                                                <i class="material-icons">search</i> Submit
-                                                                            </button>
-=======
                                                                     </div>
                                                                     <div class="col-lg-3 col-sm-4" style="text-align: left;">
                                                                         <div class="form-group">
                                                                             <label for="recDuration" class="label-control">Duration Time</label>
                                                                             <input type="text" class="form-control timepicker formDuration" id="recDuration">
                                                                             <span class="bmd-help">Explain your task</span>
->>>>>>> master:public/cuto-portal.html
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-3 col-sm-4" style="text-align: left;">
@@ -304,19 +279,12 @@
                                                                             <label class="label-control">Choose Start Date/Time</label>
                                                                             <input id="otherStart" type="text" class="form-control datetimepicker formStart" value="">
                                                                         </div>
-<<<<<<< HEAD:public/BS4/cuto-portal.html
-                                                                        <div class="col-lg-3 col-sm-4" style="text-align: left;">
-                                                                            <button id= "otherSubmit" class="btn btn-success" type="reset" data-toggle="modal" data-target="#myModal">
-                                                                                <i class="material-icons">search</i> Submit
-                                                                            </button>
-=======
                                                                     </div>
                                                                     <div class="col-lg-3 col-sm-4" style="text-align: left;">
                                                                         <div class="form-group">
                                                                             <label for="Input2" class="label-control">Duration Time</label>
                                                                             <input id="otherDuration" type="text" class="form-control timepicker formDuration" id="Input2">
                                                                             <span class="bmd-help">Explain your task</span>
->>>>>>> master:public/cuto-portal.html
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-3 col-sm-4" style="text-align: left;">
