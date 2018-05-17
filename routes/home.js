@@ -63,6 +63,7 @@ module.exports = function (app) {
 
             db.User.findOne({
                 where: {
+
                     username: req.session.user
                 }
             }).then(function (info) {
@@ -70,7 +71,11 @@ module.exports = function (app) {
                 photo = info.dataValues.picURL
             })
 
-            db.Tasks.findAll({}).then(function (data) {
+            db.Tasks.findAll({
+                where: {
+                    UserUsername: req.params.username
+                }
+            }).then(function (data) {
                 res.render('index', {
                     data: data,
                     helpers: {
@@ -90,5 +95,16 @@ module.exports = function (app) {
                 id: req.params.id
             }
         })
+    })
+
+    app.put("/tasks/update/:id", function (req, res) {
+
+        db.Tasks.update({
+            completed: true
+        }, {
+                where: {
+                    id: req.params.id
+                }
+            })
     })
 }
