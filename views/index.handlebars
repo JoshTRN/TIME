@@ -365,24 +365,26 @@
                                                 <h4 class="title text-center">Statistics</h4>
                                             </div>
                                             <div class="card-content" style="padding: 20px;">
-                                                <canvas id="myChart"></canvas>
+                                                <canvas id="completed-chart"></canvas>
+                                                <canvas class="hidden" id="incomplete-chart"></canvas>
+                                                <canvas class="hidden" id="all-chart"></canvas>
                                             </div>
                                             <div class="text-center">
                                                 <ul class="nav nav-tabs" data-tabs="tabs" style="background: black;">
                                                     <li class="nav-item" style="width: 33%">
-                                                        <a class="nav-link active" href="#" data-toggle="tab">
+                                                        <a class="nav-link active" href="#complete" data-toggle="tab" id="complete-task">
                                                             <i class="material-icons">layers</i>
                                                             <span>Completed</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item" style="width: 33%">
-                                                        <a class="nav-link" href="#" data-toggle="tab">
+                                                        <a class="nav-link" href="#incomplete" data-toggle="tab" id="incomplete-task">
                                                             <i class="material-icons">layers</i>
                                                             <span>Pending</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item" style="width: 33%">
-                                                        <a class="nav-link" href="#" data-toggle="tab">
+                                                        <a class="nav-link" href="#all" data-toggle="tab" id="all-task">
                                                             <i class="material-icons">layers</i>
                                                             <span>All</span>
                                                         </a>

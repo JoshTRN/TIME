@@ -18,6 +18,60 @@ module.exports = function (app) {
         })
     });
 
+    app.get("/:username/tasks/completed", function (req, res) {
+        if (req.session.user === req.params.username) {
+            var countList = [],
+                categoryList = [];
+
+            db.Tasks.findAndCountAll({
+                attributes: ['category'],
+                where: {
+                    UserUsername: req.session.user,
+                    completed: true
+                },
+                group: 'category'
+            }).then(function (result) {
+                res.json(result)
+            })
+        }
+    });
+
+    app.get("/:username/tasks/all", function (req, res) {
+        if (req.session.user === req.params.username) {
+            var countList = [],
+                categoryList = [];
+
+            db.Tasks.findAndCountAll({
+                attributes: ['category'],
+                where: {
+                    UserUsername: req.session.user
+                },
+                group: 'category'
+            }).then(function (result) {
+                res.json(result)
+            })
+        }
+    });
+
+    app.get("/:username/tasks/incomplete", function (req, res) {
+        if (req.session.user === req.params.username) {
+            var countList = [],
+                categoryList = [];
+
+            db.Tasks.findAndCountAll({
+                attributes: ['category'],
+                where: {
+                    UserUsername: req.session.user,
+                    completed: false
+                },
+                group: 'category'
+            }).then(function (result) {
+                res.json(result)
+            })
+        }
+    });
+    
+
     app.post("/api/users", function (req, res) {
         var username = req.body.user
         db.User.findAndCountAll({
@@ -60,7 +114,7 @@ module.exports = function (app) {
         if (req.session.user === req.params.username) {
             var photo;
             countList = [],
-                categoryList = [];
+            categoryList = [];
 
             db.User.findOne({
                 where: {

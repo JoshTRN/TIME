@@ -33,9 +33,7 @@ $('#signin').click(function () {
             location.reload();
         })
         
-        app.get('/'+user.email+"/tasks", function(data) {
-            console.log('getting tasks');
-        })
+        app.get('/'+user.email+"/tasks")
 
         // ...
     }).catch(function (error) {
