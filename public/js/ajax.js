@@ -63,5 +63,6 @@ $(document).ready(function () {
 			type: 'PUT',
 			url: '/tasks/update/' + id})
 	$('#' + id).hide();
+	location.reload();
 	})
 });

@@ -58,17 +58,32 @@ module.exports = function (app) {
     app.get('/:username/tasks', function (req, res) {
 
         if (req.session.user === req.params.username) {
-
             var photo;
+            countList = [],
+                categoryList = [];
 
             db.User.findOne({
                 where: {
-
                     username: req.session.user
                 }
             }).then(function (info) {
                 console.log(info.dataValues.picURL);
                 photo = info.dataValues.picURL
+            })
+
+            db.Tasks.findAndCountAll({
+                attributes: ['category'],
+                where: {
+                    UserUsername: req.session.user
+                },
+                group: 'category'
+            }).then(function (result) {
+                for (var i = 0; i < result.rows.length; i++) {
+                    categoryList.push(result.rows[i].dataValues.category);
+                    countList.push(result.count[i].count);
+                }
+                console.log(categoryList);
+                console.log(countList);
             })
 
             db.Tasks.findAll({
@@ -79,7 +94,9 @@ module.exports = function (app) {
                 res.render('index', {
                     data: data,
                     helpers: {
-                        photo: photo
+                        photo: photo,
+                        countList: countList,
+                        categoryList: categoryList
                     }
                 })
             });
@@ -89,7 +106,6 @@ module.exports = function (app) {
     })
 
     app.delete('/:username/tasks/delete/:id', function (req, res) {
-        console.log('hitting')
         db.Tasks.destroy({
             where: {
                 id: req.params.id

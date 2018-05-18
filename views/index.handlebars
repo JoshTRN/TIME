@@ -301,7 +301,7 @@
                                                             <td>{{this.duration}}</td>
                                                             <td>
                                                                 <div class="text-center" style="display:inline-block;">
-                                                                    <button class="btn badge badge-danger delete-task" >
+                                                                    <button class="btn badge badge-danger delete-task">
                                                                         <i class="material-icons">delete_forever</i>
                                                                     </button>
                                                                     <button class="btn badge badge-success complete">
@@ -362,61 +362,32 @@
                                     <div class="col-md-8">
                                         <div class="card">
                                             <div class="card-header card-header-success">
-                                                <h4 class="title">Edit Profile</h4>
+                                                <h4 class="title text-center">Statistics</h4>
                                             </div>
                                             <div class="card-content" style="padding: 20px;">
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">name</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">Email address</label>
-                                                                <input type="email" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">Adress 1</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">Adress 2</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">City</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">Country</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">Postal Code</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
-                                                    <div class="clearfix"></div>
-                                                </form>
+                                                <canvas id="myChart"></canvas>
+                                            </div>
+                                            <div class="text-center">
+                                                <ul class="nav nav-tabs" data-tabs="tabs" style="background: black;">
+                                                    <li class="nav-item" style="width: 33%">
+                                                        <a class="nav-link active" href="#" data-toggle="tab">
+                                                            <i class="material-icons">layers</i>
+                                                            <span>Completed</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item" style="width: 33%">
+                                                        <a class="nav-link" href="#" data-toggle="tab">
+                                                            <i class="material-icons">layers</i>
+                                                            <span>Pending</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item" style="width: 33%">
+                                                        <a class="nav-link" href="#" data-toggle="tab">
+                                                            <i class="material-icons">layers</i>
+                                                            <span>All</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -424,7 +395,7 @@
                                         <div class="card">
                                             <div class="profile">
                                                 <div class="avatar">
-                                                    <img src="{{photo}}" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                                                    <img src="{{photo}}" alt="Circle Raised" class="img-raised rounded-circle img-fluid">
                                                 </div>
                                                 <div class="name" style="padding-left: 5px;">
                                                     <h3 class="title"></h3>
@@ -439,10 +410,6 @@
                                                             <i class="fa fa-facebook-square"></i>
                                                         </a>
                                                     </h4>
-                                                    <h6 class="text-gray">Juan</h6>
-                                                    <h6 class="text-gray">Juan@juan.juan</h6>
-                                                    <h6 class="text-gray">juan juan juan juan
-                                                        <br>Miami, FL juan</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -480,9 +447,10 @@
 <!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 <script src="/assets/js/plugins/nouislider.min.js"></script>
 <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
-<script src="/assets/js/material-kit.js?v=2.0.2"></script>
+<script src="/assets/js/material-kit.js?v=2.0.2"></script> {{!-- Chart js --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 <script src="/js/ajax.js"></script>
-
+<script src="/js/chart.js"></script>
 <script>
     $(document).ready(function () {
 
