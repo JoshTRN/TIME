@@ -19,6 +19,6 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "use_env_variable": "mysql://b683c5ffeef0ce:60a6cbcf@us-cdbr-iron-east-04.cleardb.net/heroku_c989cbc95326999?reconnect=true"
+    "use_env_variable": "mysql2://b683c5ffeef0ce:60a6cbcf@us-cdbr-iron-east-04.cleardb.net/heroku_c989cbc95326999?reconnect=true"
   }
 }
