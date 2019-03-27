@@ -51,7 +51,7 @@ $(document).ready(function () {
 		var id = this.closest('tr').id;
 		$.ajax({
 			type: 'DELETE',
-			url: 'tasks/delete/' + id
+			url: '/tasks/delete/' + id
 		})
 		$('#' + id).hide();
 	})
