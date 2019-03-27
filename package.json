@@ -15,7 +15,7 @@
     "session": "^0.1.0"
   },
   "engines": {
-    "node": "10.13.0"
+    "node": "8.11.2"
   },
   "devDependencies": {},
   "scripts": {
