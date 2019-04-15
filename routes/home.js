@@ -15,7 +15,8 @@ module.exports = app => {
 
     app.get("/tasks", validator, (req, res) => {
         
-        const { user:username } = req.body;
+        const { user: username } = req.session;
+
         let photo,
             countList = [],
             categoryList = [];
@@ -24,7 +25,10 @@ module.exports = app => {
             where: {
                 username
             }
-        }).then(info => (photo = info.dataValues.picURL));
+        }).then(info =>  {
+            photo = info.dataValues.picURL
+            console.log(photo);
+        });
 
         db.Tasks.findAndCountAll({
             attributes: ["category"],
@@ -76,10 +80,8 @@ module.exports = app => {
         }).then(result => res.json(result));
     });
 
-    app.get("/tasks/incomplete", (req, res) => {
-        if (!req.session.user) {
-            return;
-        }
+    app.get("/tasks/incomplete", validator, (req, res) => {
+        
         db.Tasks.findAndCountAll({
             attributes: ["category"],
             where: {
@@ -111,7 +113,7 @@ module.exports = app => {
         });
     });
 
-    app.post("/api/tasks", (req, res) => {
+    app.post("/api/tasks", validator, (req, res) => {
         const {
             category,
             name: taskName,
@@ -134,10 +136,8 @@ module.exports = app => {
         req.session.destroy(err => res.redirect("/"))
     );
 
-    app.put("/tasks/update/:id", (req, res) => {
-        if (!req.session.user) {
-            return;
-        }
+    app.put("/tasks/update/:id", validator, (req, res) => {
+        
         db.Tasks.update(
             {
                 completed: true
@@ -151,10 +151,8 @@ module.exports = app => {
         );
     });
 
-    app.delete("/tasks/delete/:id", (req, res) => {
-        if (!req.session.user) {
-            return;
-        }
+    app.delete("/tasks/delete/:id", validator, (req, res) => {
+        
         db.Tasks.destroy({
             where: {
                 id: req.params.id,
