@@ -16,23 +16,21 @@ module.exports = app => {
     app.get("/tasks", validator, async (req, res) => {
         const { user: username } = req.session;
 
-        const photo = await db.User.findOne({
+        const user = await db.User.findOne({
             where: {
                 username
             }
         });
 
-       const data =  await db.Tasks.findAll({
+        const data = await db.Tasks.findAll({
             where: {
-                UserUsername: req.session.user
+                UserUsername: username
             }
         });
 
         res.render("index", {
             data,
-            helpers: {
-                photo: photo.dataValues.picURL
-            }
+            photo: user.dataValues.picURL
         });
     });
 
