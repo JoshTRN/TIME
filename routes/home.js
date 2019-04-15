@@ -13,13 +13,9 @@ module.exports = app => {
         res.redirect("/tasks");
     });
 
-    app.get("/tasks", (req, res) => {
-        const { user: username } = req.session;
-        if (!username) {
-            res.redirect("/");
-            return;
-        }
-
+    app.get("/tasks", validator, (req, res) => {
+        
+        const { user:username } = req.body;
         let photo,
             countList = [],
             categoryList = [];
@@ -57,10 +53,8 @@ module.exports = app => {
         });
     });
 
-    app.get("/tasks/completed", (req, res) => {
-        if (!req.session.user) {
-            return;
-        }
+    app.get("/tasks/completed", validator, (req, res) => {
+    
         db.Tasks.findAndCountAll({
             attributes: ["category"],
             where: {
@@ -71,10 +65,7 @@ module.exports = app => {
         }).then(result => res.json(result));
     });
 
-    app.get("/tasks/all", (req, res) => {
-        if (!req.session.user) {
-            return;
-        }
+    app.get("/tasks/all", validator, (req, res) => {
 
         db.Tasks.findAndCountAll({
             attributes: ["category"],
@@ -108,13 +99,11 @@ module.exports = app => {
             }
         }).then(result => {
             if (!result.count != 0) {
-                console.log("creating user");
                 db.User.create({
                     username,
                     picURL
                 });
-            } else {
-                console.log("User exists");
+                return;
             }
 
             req.session.user = username;
@@ -174,3 +163,12 @@ module.exports = app => {
         });
     });
 };
+
+function validator(req, res, next) {
+    if (!req.session.user) {
+        console.log('user must log in');
+        res.redirect('/');
+        return
+    }
+    next();
+}
