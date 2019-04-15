@@ -13,52 +13,30 @@ module.exports = app => {
         res.redirect("/tasks");
     });
 
-    app.get("/tasks", validator, (req, res) => {
-        
+    app.get("/tasks", validator, async (req, res) => {
         const { user: username } = req.session;
 
-        let photo,
-            countList = [],
-            categoryList = [];
-
-        db.User.findOne({
+        const photo = await db.User.findOne({
             where: {
                 username
             }
-        }).then(info =>  {
-            photo = info.dataValues.picURL
-            console.log(photo);
         });
 
-        db.Tasks.findAndCountAll({
-            attributes: ["category"],
-            where: {
-                UserUsername: username
-            },
-            group: "category"
-        }).then(result => {
-            categoryList = result.rows.map(item => item.dataValues.category);
-            countList = result.count.map(item => item.count);
-        });
-
-        db.Tasks.findAll({
+       const data =  await db.Tasks.findAll({
             where: {
                 UserUsername: req.session.user
             }
-        }).then(data => {
-            res.render("index", {
-                data,
-                helpers: {
-                    photo,
-                    countList,
-                    categoryList
-                }
-            });
+        });
+
+        res.render("index", {
+            data,
+            helpers: {
+                photo: photo.dataValues.picURL
+            }
         });
     });
 
     app.get("/tasks/completed", validator, (req, res) => {
-    
         db.Tasks.findAndCountAll({
             attributes: ["category"],
             where: {
@@ -70,7 +48,6 @@ module.exports = app => {
     });
 
     app.get("/tasks/all", validator, (req, res) => {
-
         db.Tasks.findAndCountAll({
             attributes: ["category"],
             where: {
@@ -81,7 +58,6 @@ module.exports = app => {
     });
 
     app.get("/tasks/incomplete", validator, (req, res) => {
-        
         db.Tasks.findAndCountAll({
             attributes: ["category"],
             where: {
@@ -137,7 +113,6 @@ module.exports = app => {
     );
 
     app.put("/tasks/update/:id", validator, (req, res) => {
-        
         db.Tasks.update(
             {
                 completed: true
@@ -152,7 +127,6 @@ module.exports = app => {
     });
 
     app.delete("/tasks/delete/:id", validator, (req, res) => {
-        
         db.Tasks.destroy({
             where: {
                 id: req.params.id,
@@ -164,9 +138,9 @@ module.exports = app => {
 
 function validator(req, res, next) {
     if (!req.session.user) {
-        console.log('user must log in');
-        res.redirect('/');
-        return
+        console.log("user must log in");
+        res.redirect("/");
+        return;
     }
     next();
 }
