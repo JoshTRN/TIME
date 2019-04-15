@@ -6,32 +6,30 @@ module.exports = app => {
         if (!req.session.user) {
             res.sendFile(
                 path.join(__dirname, "../public/hazmathub-signup.html")
-                );
-                return;
-            }
-            
+            );
+            return;
+        }
+
         res.redirect("/tasks");
     });
-    
-    app.get("/logout", (req, res) => req.session.destroy(err => res.redirect("/")));
-    
+
     app.get("/tasks", (req, res) => {
         const { user: username } = req.session;
         if (!username) {
             res.redirect("/");
             return;
         }
-    
+
         let photo,
             countList = [],
             categoryList = [];
-    
+
         db.User.findOne({
             where: {
                 username
             }
         }).then(info => (photo = info.dataValues.picURL));
-    
+
         db.Tasks.findAndCountAll({
             attributes: ["category"],
             where: {
@@ -42,7 +40,7 @@ module.exports = app => {
             categoryList = result.rows.map(item => item.dataValues.category);
             countList = result.count.map(item => item.count);
         });
-    
+
         db.Tasks.findAll({
             where: {
                 UserUsername: req.session.user
@@ -68,6 +66,34 @@ module.exports = app => {
             where: {
                 UserUsername: req.session.user,
                 completed: true
+            },
+            group: "category"
+        }).then(result => res.json(result));
+    });
+
+    app.get("/tasks/all", (req, res) => {
+        if (!req.session.user) {
+            return;
+        }
+
+        db.Tasks.findAndCountAll({
+            attributes: ["category"],
+            where: {
+                UserUsername: req.session.user
+            },
+            group: "category"
+        }).then(result => res.json(result));
+    });
+
+    app.get("/tasks/incomplete", (req, res) => {
+        if (!req.session.user) {
+            return;
+        }
+        db.Tasks.findAndCountAll({
+            attributes: ["category"],
+            where: {
+                UserUsername: req.session.user,
+                completed: false
             },
             group: "category"
         }).then(result => res.json(result));
@@ -115,6 +141,10 @@ module.exports = app => {
         });
     });
 
+    app.post("/logout", (req, res) =>
+        req.session.destroy(err => res.redirect("/"))
+    );
+
     app.put("/tasks/update/:id", (req, res) => {
         if (!req.session.user) {
             return;
@@ -129,19 +159,18 @@ module.exports = app => {
                     UserUsername: req.session.user
                 }
             }
-            );
-        });
-        
-    app.delete("/tasks/delete/:id", (req, res) => {
-            if (!req.session.user) {
-                return;
-            }
-            db.Tasks.destroy({
-                where: {
-                    id: req.params.id,
-                    UserUsername: req.session.user
-                }
-            });
+        );
     });
-    
+
+    app.delete("/tasks/delete/:id", (req, res) => {
+        if (!req.session.user) {
+            return;
+        }
+        db.Tasks.destroy({
+            where: {
+                id: req.params.id,
+                UserUsername: req.session.user
+            }
+        });
+    });
 };

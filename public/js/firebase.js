@@ -46,8 +46,7 @@ $("#logout").click(function() {
         .then(function() {
             // Sign-out successful.
 
-            $.get("/logout");
-            console.log("signed out");
+            $.post("/logout", () => location.reload());
         })
         .catch(function(error) {
             throw error;
