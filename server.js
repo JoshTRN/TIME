@@ -23,8 +23,8 @@ app.use(session({ secret: process.env.SESSION_SECRET, cookie: { maxAge: 600000 }
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.use(require('./routes/apiRoutes'));
-require("./routes/home.js")(app);
+app.use(require('./routes/'));
+require("./routes/home.js");
 
 db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
