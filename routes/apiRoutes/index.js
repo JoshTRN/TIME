@@ -1,6 +1,17 @@
 const router = require('express').Router();
-const db = require('../../models')
+const tasks = require('./tasks');
 
-router.get('/test', (req, res) => res.send('route hit')),
+router.use('/tasks', validator, tasks);
+
+
+function validator(req, res, next) {
+    if (!req.session.user) {
+        console.log("user must log in");
+        res.redirect("/");
+        return;
+    }
+    next();
+}
+
 
 module.exports = router

@@ -1,5 +1,5 @@
 const path = require("path");
-const db = require("../models");
+const taskController = require("../controllers/taskController");
 
 module.exports = app => {
     app.get("/", (req, res) => {
@@ -13,58 +13,6 @@ module.exports = app => {
         res.redirect("/tasks");
     });
 
-    app.get("/tasks", validator, async (req, res) => {
-        const { user: username } = req.session;
-
-        const user = await db.User.findOne({
-            where: {
-                username
-            }
-        });
-
-        const data = await db.Tasks.findAll({
-            where: {
-                UserUsername: username
-            }
-        });
-
-        res.render("index", {
-            data,
-            photo: user.dataValues.picURL
-        });
-    });
-
-    app.get("/tasks/completed", validator, (req, res) => {
-        db.Tasks.findAndCountAll({
-            attributes: ["category"],
-            where: {
-                UserUsername: req.session.user,
-                completed: true
-            },
-            group: "category"
-        }).then(result => res.json(result));
-    });
-
-    app.get("/tasks/all", validator, (req, res) => {
-        db.Tasks.findAndCountAll({
-            attributes: ["category"],
-            where: {
-                UserUsername: req.session.user
-            },
-            group: "category"
-        }).then(result => res.json(result));
-    });
-
-    app.get("/tasks/incomplete", validator, (req, res) => {
-        db.Tasks.findAndCountAll({
-            attributes: ["category"],
-            where: {
-                UserUsername: req.session.user,
-                completed: false
-            },
-            group: "category"
-        }).then(result => res.json(result));
-    });
 
     app.post("/api/users", (req, res) => {
         const { user: username, picURL } = req.body;
@@ -110,28 +58,6 @@ module.exports = app => {
         req.session.destroy(err => res.redirect("/"))
     );
 
-    app.put("/tasks/update/:id", validator, (req, res) => {
-        db.Tasks.update(
-            {
-                completed: true
-            },
-            {
-                where: {
-                    id: req.params.id,
-                    UserUsername: req.session.user
-                }
-            }
-        );
-    });
-
-    app.delete("/tasks/delete/:id", validator, (req, res) => {
-        db.Tasks.destroy({
-            where: {
-                id: req.params.id,
-                UserUsername: req.session.user
-            }
-        });
-    });
 };
 
 function validator(req, res, next) {
