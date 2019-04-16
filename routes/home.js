@@ -62,7 +62,6 @@ module.exports = app => {
 
 function validator(req, res, next) {
     if (!req.session.user) {
-        console.log("user must log in");
         res.redirect("/");
         return;
     }

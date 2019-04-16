@@ -12,9 +12,7 @@ router.get("/", async (req, res) => {
     });
 });
 
-router.get("/completed", async (req, res) => {
-        res.json(await taskController.getComplete(req.session.user));
-});
+router.get("/completed", async (req, res) => res.json(await taskController.getComplete(req.session.user)));
 
 router.get("/all", async (req, res) => {
     res.json(await taskController.getCategories(req.session.user));
